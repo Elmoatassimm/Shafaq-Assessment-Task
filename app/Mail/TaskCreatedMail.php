@@ -20,7 +20,8 @@ class TaskCreatedMail extends Mailable implements ShouldQueue
     }
 
     public function build()
-    {
+    { 
+        // email form
         return $this->subject('New Task Created')
                     ->view('emails.task_created')
                     ->with(['task' => $this->task]);
