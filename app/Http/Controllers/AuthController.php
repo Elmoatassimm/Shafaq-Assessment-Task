@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\ResponseService;
 
 
+
 class AuthController extends Controller
 {
     /*
-     * The response service instance.
+      The response service instance.
      
      */
     protected $responseService;
