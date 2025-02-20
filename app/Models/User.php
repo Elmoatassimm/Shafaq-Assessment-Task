@@ -54,12 +54,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(\App\Models\Payment::class);
     }
 
-    /**
-     * Check if the user has a successful payment.
-     *
-     * @return bool
-     */
-    public function isPaid()
+    
+    public function isPaid():bool
     {
         $payment = $this->payment()->first(); // Get the actual payment record
 
