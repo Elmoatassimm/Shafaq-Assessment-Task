@@ -24,6 +24,7 @@ class SendTaskCreatedEmail implements ShouldQueue
 
     public function handle()
     {
+        // send email
         Mail::to($this->task->user->email)->send(new TaskCreatedMail($this->task));
     }
 }
