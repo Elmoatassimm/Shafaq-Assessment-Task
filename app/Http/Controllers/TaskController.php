@@ -10,7 +10,7 @@ use App\Http\Requests\TaskUpdateRequest;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use App\Jobs\SendTaskCreatedEmail;
 use Illuminate\Http\JsonResponse;
-
+use App\Models\User;
 
 class TaskController extends Controller
 {
