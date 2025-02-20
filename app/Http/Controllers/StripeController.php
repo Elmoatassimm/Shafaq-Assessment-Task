@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Stripe\Exception\ApiErrorException;
-
+use App\Models\User;
 
 class StripeController extends Controller
 {
