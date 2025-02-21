@@ -17,7 +17,7 @@ class ResponseService
     }
 
    
-    public function error(string $message = '', array $errors = [ ], int $status = 400): JsonResponse
+    public function error(string $message = '', array $errors = [], int $status = 400): JsonResponse
 {
     return response()->json([
         'message' => $message,

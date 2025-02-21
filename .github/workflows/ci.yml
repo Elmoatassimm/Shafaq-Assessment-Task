@@ -15,49 +15,42 @@ jobs:
       DB_DATABASE: database/database.sqlite
       STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK }}
       STRIPE_SECRET: ${{ secrets.STRIPE_SECRET_KEY }}
-      MAIL_MAILER: smtp
-      MAIL_HOST: smtp.gmail.com
-      MAIL_PORT: 587
-      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-      MAIL_ENCRYPTION: tls
-      MAIL_FROM_ADDRESS: mouatassemben95@gmail.com
-      MAIL_FROM_NAME: "Task Manager App"
+      MAIL_MAILER: log
       QUEUE_CONNECTION: database
 
     steps:
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
-          
-      - uses: actions/checkout@v3
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
+        
+    - uses: actions/checkout@v3
 
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      
+    - name: Create Database
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
         
-      - name: Create Database
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
-          
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-        
-      - name: Generate Application Key
-        run: php artisan key:generate
-        
-      - name: Generate JWT Secret Key
-        run: php artisan jwt:secret --force
-        
-      - name: Set Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-        
-      - name: Run Migrations
-        run: php artisan migrate --force
-        
-      - name: Start Queue Worker
-        run: nohup php artisan queue:work --tries=3 --timeout=90 &
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      
+    - name: Generate Application Key
+      run: php artisan key:generate
+      
+    - name: Generate JWT Secret Key
+      run: php artisan jwt:secret --force
+      
+    - name: Set Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+      
+    - name: Run Migrations
+      run: php artisan migrate --force
+      
+    - name: Start Queue Worker
+      run: nohup php artisan queue:work --tries=3 --timeout=90 &
 
-      - name: Run Pest Tests
-        run: vendor/bin/pest
+    - name: Run Pest Tests
+      run: vendor/bin/pest
