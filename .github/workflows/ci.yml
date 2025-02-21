@@ -16,6 +16,7 @@ jobs:
       STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK }}
       STRIPE_SECRET: ${{ secrets.STRIPE_SECRET_KEY }}
       MAIL_MAILER: log
+      QUEUE_CONNECTION: database
 
     steps:
     - uses: shivammathur/setup-php@v2
@@ -48,5 +49,8 @@ jobs:
     - name: Run Migrations
       run: php artisan migrate --force
       
+    - name: Start Queue Worker
+      run: nohup php artisan queue:work --tries=3 --timeout=90 &
+
     - name: Run Pest Tests
       run: vendor/bin/pest
