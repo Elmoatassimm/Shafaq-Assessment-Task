@@ -12,7 +12,7 @@ it('can create a task', function () {
 
     $response = $this->postJson('/api/tasks', [
         'title' => 'Test Task',
-        'description' => 'Task description',
+        'description' => 'Task description ',
         'status' => 'pending',
         'due_date' => '2025-03-03', // Example due date
         
