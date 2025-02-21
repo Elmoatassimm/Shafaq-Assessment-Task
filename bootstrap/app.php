@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 
 
-if (!defined('PHP_BINARY') || empty(PHP_BINARY)) {
-    define('PHP_BINARY', '/home/elmoatassim_billah/.config/herd-lite/bin/php');
-}
+
 
 
 return Application::configure(basePath: dirname(__DIR__))
