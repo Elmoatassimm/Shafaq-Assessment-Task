@@ -10,8 +10,8 @@ it('can register a user', function () {
     $response = $this->postJson('/api/auth/register', [
         'name' => 'Test User',
         'email' => 'test@example.com',
-        'password' => 'password',
-        'password_confirmation' => 'password', // Ensure this is included
+        'password' => 'passwordd',
+        'password_confirmation' => 'passwordd', // Ensure this is included
     ]);
 
     $response->assertStatus(201)
