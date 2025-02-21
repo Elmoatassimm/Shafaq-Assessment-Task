@@ -13,8 +13,8 @@ jobs:
     env:
       DB_CONNECTION: sqlite
       DB_DATABASE: database/database.sqlite
-      STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
-      STRIPE_SECRET: ${{ secrets.STRIPE_SECRET }}
+      STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK }}
+      STRIPE_SECRET: ${{ secrets.STRIPE_SECRET_KEY }}
       MAIL_MAILER: log
 
     steps:
