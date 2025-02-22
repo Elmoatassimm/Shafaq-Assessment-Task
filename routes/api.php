@@ -28,7 +28,7 @@ Route::group(['middleware' => ['api', 'auth:api']], function () {
     Route::get('/tasks/{task}', [TaskController::class, 'show']);
     Route::put('/tasks/{task}', [TaskController::class, 'update']);
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
-    Route::post('/create-payment-intent', [StripeController::class, 'createPaymentIntent']);
+    Route::get('/create-payment-intent', [StripeController::class, 'createPaymentIntent']);
 });
 
 

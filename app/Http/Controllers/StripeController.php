@@ -7,28 +7,34 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
+use Illuminate\Http\JsonResponse;
 use Stripe\Exception\ApiErrorException;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class StripeController extends Controller
 {
 
-    public function createPaymentIntent(Request $request)
+    public function createPaymentIntent():JsonResponse
     {
+
+        
         // Set Stripe API key
-        $apikey = env("STRIPE_SECRET_KEY");
-        return response()->json($apikey);
+       
         Stripe::setApiKey(env("STRIPE_SECRET_KEY"));
 
         // Check if the user has already completed a successful payment
         $existingPayment = Payment::where('user_id', Auth::id())
             ->where('status', 'success')
             ->first();
+
         if ($existingPayment) {
             return response()->json([
                 'message' => 'User already paid'
             ], 400);
         }
+
+       
 
         try {
             // Create a payment intent with a fixed amount (e.g., $1.00 in cents)
@@ -41,6 +47,7 @@ class StripeController extends Controller
                 ]
             ]);
 
+           
             // Store payment details in the database
             Payment::create([
                 "user_id" => Auth::id(),
@@ -56,7 +63,7 @@ class StripeController extends Controller
             // Handle Stripe API error
             return response()->json([
                 'error' => $e->getMessage(),
-            ], 500);
+            ]);
         }
     }
 
