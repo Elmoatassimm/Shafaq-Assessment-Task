@@ -16,6 +16,8 @@ class StripeController extends Controller
     public function createPaymentIntent(Request $request)
     {
         // Set Stripe API key
+        $apikey = env("STRIPE_SECRET_KEY");
+        return response()->json($apikey);
         Stripe::setApiKey(env("STRIPE_SECRET_KEY"));
 
         // Check if the user has already completed a successful payment
