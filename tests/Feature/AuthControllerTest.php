@@ -46,7 +46,7 @@ it('can login a user', function () {
                  'data' => [
                      'token' => true, // Check if token exists
                      'token_type' => 'bearer',
-                     'expires_in' => 3600,
+                     'expires_in' => true,
                  ],
              ]);
 });
