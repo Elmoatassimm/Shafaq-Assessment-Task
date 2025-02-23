@@ -34,4 +34,4 @@ Route::group(['middleware' => ['api', 'auth:api']], function () {
 
 
 
-Route::post('/stripe/webhook', [StripeController::class, 'handleWebhook']);
+// Route::post('/stripe/webhook', [StripeController::class, 'handleWebhook']);

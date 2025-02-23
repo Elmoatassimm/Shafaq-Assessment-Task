@@ -27,6 +27,9 @@ class User extends Authenticatable implements JWTSubject
     ];
 
 
+    protected $appends = ['is_paid'];
+
+
     protected function casts(): array
     {
         return [
@@ -64,5 +67,14 @@ class User extends Authenticatable implements JWTSubject
         }
 
         if ($payment->status === 'success') return true;
+    }
+
+
+     /**
+     * Accessor to include the is_paid attribute.
+     */
+    public function getIsPaidAttribute(): bool
+    {
+        return $this->isPaid();
     }
 }
