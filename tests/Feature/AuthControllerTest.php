@@ -24,7 +24,7 @@ it('can register a user', function () {
                          'email' => 'test@example.com',
                          // You can also check for created_at and updated_at if needed
                      ],
-                     'token' => true, // Check if token exists
+                     'token' => true,  // Check if token exists
                  ],
              ]);
 });
