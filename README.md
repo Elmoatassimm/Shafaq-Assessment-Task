@@ -45,7 +45,7 @@ https://lll-pi-ten.vercel.app/api/api
 | `/tasks`                   | POST       | Yes               | Creates a new task. *If a `priority` field is provided, the user must be paid.* |
 | `/tasks/{task}`            | PUT        | Yes               | Updates an existing task. *Updating `priority` requires a paid subscription.* |
 | `/tasks/{task}`            | DELETE     | Yes               | Deletes a task.                                               |
-| **Payment**                |            |                   |                                                               |
+| **Payment**                   |            |                   |                                                               |
 | `/create-payment-intent`   | GET        | Yes               | Creates a payment intent for processing payments.             |
 
 ---
